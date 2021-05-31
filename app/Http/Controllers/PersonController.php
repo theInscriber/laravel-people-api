@@ -45,16 +45,4 @@ class PersonController extends Controller
     {
         return new PersonResource($this->createPerson->run());
     }
-
-    public function update(Request $request, Person $person)
-    {
-        return new PersonResource($person);
-    }
-
-    public function delete(Request $request, Person $person)
-    {
-        $person->delete();
-
-        return response()->json('Person deleted successfully',200);
-    }
 }
