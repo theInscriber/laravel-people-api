@@ -116,17 +116,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Password Confirmation Timeout
+    | Accepted Predefined API Keys
     |--------------------------------------------------------------------------
     |
-    | Here you may define the amount of seconds before a password confirmation
-    | times out and the user is prompted to re-enter their password via the
-    | confirmation screen. By default, the timeout lasts for three hours.
+    | Here you may define API Keys that you want to be accepted in requests.
+    | Bonus: Supports multiple Keys
     |
     */
 
-    'accepted_tokens' => [
-        '2a08950e-a893-4eb9-b5ee-765d42e9101a'
+    'accepted_api_keys' => [
+        // Arbitrary Keys
+        '2a08950e-a893-4eb9-b5ee-765d42e9101a',
+        '2a08950e-a893-4eb9-b5ee-765d42e9101b'
     ],
 
 ];
