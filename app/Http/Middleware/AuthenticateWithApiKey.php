@@ -2,13 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Auth;
 
-class AuthenticateWithToken
+class AuthenticateWithApiKey
 {
     /**
      * Handle an incoming request.
@@ -20,10 +17,13 @@ class AuthenticateWithToken
     public function handle(Request $request, Closure $next)
     {
         if (!config()->has('auth.accepted_api_keys'))
-            abort(401, 'There are no API Keys');
+            abort(503, 'There are no API Keys in the systems. Please contact the support with the issue.');
+
+        if (!$request->has('api_key'))
+            abort(400, 'API Key required');
 
         if(!in_array($request->get('api_key'), config('auth.accepted_api_keys')))
-            abort(401, 'API key not found');
+            abort(401, 'API Key not found');
 
         return $next($request);
     }
