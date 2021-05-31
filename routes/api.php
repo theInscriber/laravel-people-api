@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::prefix('/people')
+    ->name('people.')
+    ->middleware(['auth.token'])
+    ->group(function () {
+        Route::get('/', [PersonController::class, 'getAll'])->name('get_all');
+        Route::post('/', [PersonController::class, 'store'])->name('store');
+        Route::get('/latest', [PersonController::class, 'getLatest'])->name('get_all.latest');
+        Route::get('/statistics', [PersonController::class, 'getStatistics'])->name('get_all.statistics');
+        Route::get('/{person}', [PersonController::class, 'get'])->name('get');
+        Route::put('/{person}', [PersonController::class, 'update'])->name('update');
+        Route::delete('/{person}', [PersonController::class, 'delete'])->name('delete');
+    });
